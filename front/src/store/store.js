@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
+import request from 'request'
 
 Vue.use(Vuex)
 
@@ -45,6 +47,9 @@ export const store = new Vuex.Store({
         setGifDate(state, payload) {
             state.gifDate = payload
         },
+        setGifDataInit(state,payload) {
+
+        },
         setLoading(state, payload) {
             state.loading = payload
         },                  
@@ -63,6 +68,22 @@ export const store = new Vuex.Store({
         actGifDate({commit},payload){
             commit('setGifDate',payload)
         },
+        gifDataInit({commmit}){
+        //   let getUpbit = window.location.protocol + '//' + window.location.host + '/getupbit.txt'
+        //   request(getUpbit, function(err, res, body) {
+        //   let parsed = JSON.parse(body)
+        //   console.log(parsed.price)
+        // //   })
+        //     let data
+        //     axios.get(`http://127.0.0.1:8000/api/getgif`)
+        //     .then(response => {            
+        //         data = response
+        //     })
+        //     .catch(e => {
+        //     console.log(e)
+        //     })
+        //     commit('setGifDataInit',data)
+        }
     },
     modules: {
 
