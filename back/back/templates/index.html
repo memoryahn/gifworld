@@ -3,5 +3,10 @@
 </head>
 <body>
 <h1>Welcome to Gifworld</h1>
+{% for gif in data %}
+    <h2>{{ gif.title }}</h2>
+    <p>{{ gif.last_update }}</p>
+    <p>{{ gif.srcs }}</p>
+{% endfor %}
 </body>
 </html>
