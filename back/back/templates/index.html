@@ -3,10 +3,14 @@
 </head>
 <body>
 <h1>Welcome to Gifworld</h1>
+<h2>{{ count }}의 Gif</h2>
 {% for gif in data %}
+    {% if gif.srcs %}
     <h2>{{ gif.title }}</h2>
+    <p>{{ gif.number }}</p>
     <p>{{ gif.last_update }}</p>
-    <p>{{ gif.srcs }}</p>
+    <p>{{ gif.srcs }}</p>    
+    {% endif %}
 {% endfor %}
 </body>
 </html>

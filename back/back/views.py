@@ -7,7 +7,9 @@ def index(request):
     client = MongoClient("mongodb://220.230.124.148:27017")
     db = client.gif
     gifcoll = db.gifcoll
-    data = gifcoll.find() 
-    client.close()
-    return render(request, 'index.html', {'data':data})
+    data = list(gifcoll.find())
+    count = gifcoll.find().count
+    client.close()    
+    data.reverse()
+    return render(request, 'index.html', {'data':data,'count':count})
 
