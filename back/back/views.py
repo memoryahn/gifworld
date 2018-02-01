@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from pymongo import MongoClient
 from django.http import JsonResponse
+from django.http import HttpResponse
 # import json
 # from django.http import HttpResponse
 # from bson import ObjectId
@@ -30,12 +31,14 @@ def getgif(request):
     db = client.gif
     gifcoll = db.gifcoll
     data = list(gifcoll.find())
-    count = gifcoll.find().count
+    # count = gifcoll.find().count
     client.close()    
     data.reverse()  
     # jj = dict(data)
     # json.dumps(jj)
     # print(jj)
     
-    return JsonResponse(dumps(data), safe=False)
+    return HttpResponse(dumps(data))
     # return render(request, 'index.html', {'data':data,'count':count})
+    
+
