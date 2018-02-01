@@ -1,7 +1,9 @@
 <template>
   <div >
-    <h1>Hello GifWorld Header</h1>
-  </div>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="#">GifWorld</a> 
+    </nav>
+    </div>
 </template>
 <script>
 export default {

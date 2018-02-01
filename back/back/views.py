@@ -37,8 +37,10 @@ def getgif(request):
     # jj = dict(data)
     # json.dumps(jj)
     # print(jj)
-    
-    return HttpResponse(dumps(data))
+    for entry in data:
+        entry['_id'] = str(entry['_id'])
+    return JsonResponse(data,safe=False)
+    # return HttpResponse(dumps(data))
     # return render(request, 'index.html', {'data':data,'count':count})
     
 
