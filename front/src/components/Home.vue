@@ -72,7 +72,7 @@ export default {
       
     }
   },
-  mounted() {      
+  created() {      
             console.log('create')
             axios.get('http://127.0.0.1:5000/api/getgif/1')
             .then(response => {        

@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import urllib.request
 from bs4 import BeautifulSoup
-from firebase_admin import db
+# from firebase_admin import db
 import re
 import datetime
 
@@ -25,6 +25,12 @@ for s in bullpen:
     except UnicodeEncodeError:
         print("Errror : %d" % (idx))
 resp.reverse()
+beforeCount = gifcoll.find().sort([('_id',-1)]).limit(1)
+count=0
+if beforeCount != None:
+    for i in beforeCount:
+        count = int(i['count']) + 1
+
 for link in resp:
 # try:
     with urllib.request.urlopen(link) as url:
@@ -46,9 +52,10 @@ for link in resp:
         idx+=1
         print(str(idx))
         num = gifcoll.find({"number":number}).count()
-        count = int(num) + 1
         if num==0:
             data.append({'count':count,'title':titles,'srcs':srcs,'number':number,'last_update':datetime.datetime.now()})             
+            count=count+1
+            print(count)
     # except:
     #     print('error')        
 if data != None:

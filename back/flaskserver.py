@@ -15,7 +15,7 @@ mongo = PyMongo(app)
 def get_gif():
     coll = mongo.db.gifcoll
     output = []
-    for s in coll.find().limit(10):
+    for s in coll.find().limit(15):
         output.append(s)
     for entry in output:
         entry['_id'] = str(entry['_id'])
@@ -25,7 +25,7 @@ def get_gif():
 def get_gif_count(page):                                           
     coll = mongo.db.gifcoll 
     output = []
-    pageSize = 20       
+    pageSize = 15       
     skips = (int(page)-1)*pageSize
     for s in coll.find().sort([('_id',-1)]).skip(skips).limit(pageSize):
         output.append(s)
@@ -35,4 +35,4 @@ def get_gif_count(page):
 
 if __name__ == '__main__':
     app.run(debug=True)
-    # app.run(host='0.0.0.0',port='5000',debug=True)
+    # app.run(host='0.0.0.0',port=5000,debug=True)
