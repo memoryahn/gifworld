@@ -26,8 +26,8 @@ def get_gif_count(page):
     coll = mongo.db.gifcoll 
     output = []
     pageSize = 20       
-    skips = (page-1)*pageSize
-    for s in coll.find().skips(skip).limit(pageSize):
+    skips = (int(page)-1)*pageSize
+    for s in coll.find().sort([('_id',-1)]).skip(skips).limit(pageSize):
         output.append(s)
     for entry in output:
         entry['_id'] = str(entry['_id'])
