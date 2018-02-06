@@ -21,11 +21,13 @@ def get_gif():
         entry['_id'] = str(entry['_id'])
     return jsonify(output)
 
-@app.route('/api/getgif/<count>',methods=['GET'])
-def get_gif_count(count):                                           
+@app.route('/api/getgif/<page>',methods=['GET'])
+def get_gif_count(page):                                           
     coll = mongo.db.gifcoll 
-    output = []                             
-    for s in coll.find().limit(int(count)):
+    output = []
+    pageSize = 20       
+    skips = (page-1)*pageSize
+    for s in coll.find().skips(skip).limit(pageSize):
         output.append(s)
     for entry in output:
         entry['_id'] = str(entry['_id'])
