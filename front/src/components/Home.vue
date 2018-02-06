@@ -26,7 +26,7 @@ export default {
   },
   mounted() {      
             console.log('create')
-          axios.get(`http://127.0.0.1:8000/api/getgif`)
+          axios.get(`http://127.0.0.1:5000/api/getgif/10`)
             .then(response => {        
                 console.log(response)    
                 this.gifdata = response.data
