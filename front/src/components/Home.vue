@@ -1,8 +1,5 @@
 <template>
-  <div class="container" >
-    <div class="row">
-        <!-- Post Content Column -->
-        <div class="col-lg-8">
+  <div  >
           <!-- Title -->
           <ul class="pagination">
             <li class="page-item disabled">
@@ -19,15 +16,16 @@
             <li class="page-item"><a class="page-link" href="#">9</a></li>
             <li class="page-item"><a class="page-link" href="#">10</a></li>
             <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>          
-          <span style="font-size:14px">번호</span>
-          <span style="font-size:14px">제목</span>        
-          <span style="float:right;font-size:14px">날짜</span>      
-          <div v-bind:id="gif._id" class="list-group-item list-group-item-action" @click="listclick( gif )" v-for="gif in gifdata">
+          </ul>              
+          <h4>Gif</h4>      
+          <div v-bind:id="gif._id"  class="list-group-item list-group-item-action" @click="listclick( gif )" v-for="(gif,key) in gifdata" v-bind:key="key">
           <!-- Date/Time -->
           <span style="font-size:12px">{{ gif.count }}</span>
           <span style="font-size:14px">{{ gif.title }}</span>        
-          <span style="float:right;font-size:10px">{{ gif.last_update}}</span>
+          <span style="float:right;font-size:14px">글쓴이</span> 
+          <span style="float:right;font-size:14px">날짜</span>
+          <!-- <span style="float:right;font-size:10px">{{ gif.last_update}}</span> -->
+          <span style="float:right;font-size:14px">조회수</span> 
           <!-- Comments Form -->          
           <!-- <div class="card my-4">
             <h6 class="card-header">코멘트 남기기:</h6>
@@ -45,69 +43,8 @@
           <!-- <span class="badge badge-secondary" v-if="gif.count" > -->
         </div>
         <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
           <!-- Search Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">검색</h5>
-            <div class="card-body">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Categories Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">최고 조회수</h5>
-            <div class="card-body">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">1 : JavaScript</a>
-                    </li>
-                    <li>
-                      <a href="#">2 : CSS</a>
-                    </li>
-                    <li>
-                      <a href="#">3 : Tutorials</a>
-                    </li>
-                  </ul>
-            </div>
-          </div>
-          <div class="card my-4">
-            <h5 class="card-header">최고 추천수</h5>
-            <div class="card-body">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">1 : JavaScript</a>
-                    </li>
-                    <li>
-                      <a href="#">2 : CSS</a>
-                    </li>
-                    <li>
-                      <a href="#">3 : Tutorials</a>
-                    </li>
-                  </ul>
-            </div>
-          </div>
-          <!-- Side Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Side Widget</h5>
-            <div class="card-body">
-              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-            </div>
-          </div>
-
-        </div>
-      <!-- /.row -->
-
-    </div>
-    <!-- <button @click="getgif">gif를 가져오자</button> -->
-      <nav aria-label="...">    
-  </nav>   
-  </div>
+          
 </template>
 <script>
 import axios from 'axios'
@@ -115,7 +52,8 @@ export default {
     
   data () {
     return {
-        gifdata:{},
+        gifdata:{
+        },
         openid:'',
         openNumber:'',
         open:false,
@@ -139,7 +77,7 @@ export default {
           div.appendChild(br)
           var img = document.createElement('img')     
           img.src=gif.srcs[i]
-          img.style.maxWidth="500px"        
+          img.style.maxWidth="100%"        
           div.appendChild(img)
         }        
         div.id=gif.number        
@@ -149,13 +87,12 @@ export default {
         this.open=true
       }else{
         var div = document.createElement("div")       
-
         for(var i in gif.srcs){
           var br = document.createElement('br')
           div.appendChild(br)
           var img = document.createElement('img')    
-          img.src=gif.srcs[i] 
-          img.style.maxWidth="500px"               
+          img.src=gif.srcs[i]
+          img.style.maxWidth="100%"               
           div.appendChild(img)
         }        
         div.id=gif.number        
@@ -164,9 +101,6 @@ export default {
         this.openNumber=gif.number
         this.open=true
       }
-      // document.body.appendChild(btn)
-      // document.getElementById(number).appendChild(btn)
-      
     }
   },
   mounted() {      
@@ -184,6 +118,5 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>

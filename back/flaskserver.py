@@ -6,6 +6,7 @@ CORS(app)
 
 app.config['MONGO_DBNAME'] = 'gif'
 app.config['MONGO_HOST'] = 'mongodb://220.230.124.148:27017'
+# 리눅스 셋팅
 # app.config['MONGO_HOST'] = 'mongodb://127.0.0.1:27017'
 app.config['MONGO_PORT'] = '27017'
 
@@ -35,4 +36,5 @@ def get_gif_count(page):
 
 if __name__ == '__main__':
     app.run(debug=True)
+    # 리눅스 셋팅
     # app.run(host='0.0.0.0',port=5000,debug=True)

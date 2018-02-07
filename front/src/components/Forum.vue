@@ -1,0 +1,45 @@
+<template>
+<div >
+          <!-- Title -->
+          <ul class="pagination">
+            <li class="page-item disabled">
+              <span class="page-link">Previous</span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active"><span class="page-link">2<span class="sr-only">(current)</span></span></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#">6</a></li>
+            <li class="page-item"><a class="page-link" href="#">7</a></li>
+            <li class="page-item"><a class="page-link" href="#">8</a></li>
+            <li class="page-item"><a class="page-link" href="#">9</a></li>
+            <li class="page-item"><a class="page-link" href="#">10</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+          <h4>게시판</h4>
+          <div v-bind:id="gif._id" class="list-group-item list-group-item-action" @click="listclick( gif )" v-for="(gif,key) in gifdata" v-bind:key="key">
+          <!-- Date/Time -->
+          <span style="font-size:12px">번호</span>
+          <span style="font-size:14px">제목</span>        
+          <span style="float:right;font-size:14px">글쓴이</span> 
+          <span style="float:right;font-size:14px">날짜</span>
+          <!-- <span style="float:right;font-size:10px">{{ gif.last_update}}</span> -->
+          <span style="float:right;font-size:14px">조회수</span> 
+          <!-- Comments Form -->          
+          <!-- <div class="card my-4">
+            <h6 class="card-header">코멘트 남기기:</h6>
+            <div class="card-body">
+              <form>
+                <div class="form-group">
+                  <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">확인</button>
+              </form>
+            </div>
+          </div> -->
+          </div> 
+          <!-- 댓글용으로 남겨둠 -->
+          <!-- <span class="badge badge-secondary" v-if="gif.count" > -->
+        </div>
+</template>
