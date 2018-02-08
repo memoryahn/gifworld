@@ -1,28 +1,50 @@
 <template>
+<div>
 <div id="login-box">
 <div class="left">
     <h1>Sign up</h1>
-    <form @submit.prevent="onSignup" ref="form" lazy-validation>
-        <input v-model="name" type="text" name="username" placeholder="Username" required/>
-        <input v-model="email" type="text" name="email" placeholder="E-mail" required/>
-        <input v-model="password" type="password" name="password" placeholder="Password" required/>
-        <input v-model="password2" :rules="[comparePasswords]" type="password" name="password2" placeholder="Retype password" required/>
+    <form 
+    @submit.prevent="onSignup" 
+    ref="form"
+    class="form-group" 
+    lazy-validation >
+        <div class="form-group" :class="{error: validation.hasError('name')}"> 
+        <input v-model="name" type="text" name="name" placeholder="Username"/>
+        </div>
+        <div class="form-group" :class="{error: validation.hasError('email')}">
+        <input v-model="email" type="text" name="email" placeholder="E-mail" />
+        </div>
+        <div class="form-group" :class="{error: validation.hasError('password')}">
+        <input v-model="password" class="form-control" type="password" name="password" placeholder="Password"/>
+        </div>
+        <div class="form-group" :class="{error: validation.hasError('password2')}">
+        <input v-model="password2" class="form-control" type="password" name="password2" placeholder="Retype password" />
+        </div>
         <input type="submit" name="signup_submit" value="Sign me up" />
     </form>
 </div>
 
 <div class="right">
     <span class="loginwith">Sign in with<br />social network</span>
-    
     <button class="social-signin facebook">Log in with facebook</button>
     <button class="social-signin twitter">Log in with Twitter</button>
     <button class="social-signin google">Log in with Google+</button>
 </div>
 <div class="or">OR</div>
 </div>
+<div class="message valid">{{ validation.firstError('name') }}</div>
+<div class="message valid">{{ validation.firstError('email') }}</div>
+<div class="message valid">{{ validation.firstError('password') }}</div>
+<div class="message valid">{{ validation.firstError('password2') }}</div>
+</div>
 </template>
 
 <script>
+ 
+var SimpleVueValidation = require('simple-vue-validator');
+var Validator = SimpleVueValidation.Validator;
+
+  
 export default {
   data () {
     return {
@@ -32,14 +54,44 @@ export default {
         password2: '',
     }
   },
-  compurted: {
-      comparePasswords () {
-        return this.password !== this.password2 ? 'passwords do not match' : ''
+  watch: {
+      user(value){
+          console.log('change')
+          if(value !== null && value !== undefined){
+              console.log('sgininwatch')
+              this.$router.push('/')
+          }
+      }
+  },
+  validators: {
+    name(value){
+      return Validator.value(value).required().minLength(3)
+    },
+    email(value){
+      return Validator.value(value).required().email()
+    },
+      password(value) {
+        return Validator.value(value).required().minLength(6);
       },
+      'password2, password'(password2, password) {
+        if (this.submitted || this.validation.isTouched('password2')) {
+          return Validator.value(password2).required().match(password);
+        }
+      }
+  },
+  compurted: {
+      user(){
+          return this.$store.getters.user
+      }
   },
   methods: {
       onSignup() {
+        this.$validate()
+        .then((success=>{
+          if(success){
           this.$store.dispatch('signUp',{name:this.name,email:this.email,password:this.password})
+          }
+        }))
       }
   }
 }
@@ -70,7 +122,9 @@ body {
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
-
+.valid{
+  color: red;
+}
 .left {
   position: absolute;
   top: 0;
@@ -159,7 +213,7 @@ input[type="submit"]:active {
   padding: 40px;
   width: 300px;
   height: 400px;
-  background: url('https://goo.gl/YbktSj');
+  /* background: url('https://goo.gl/YbktSj'); */
   background-size: cover;
   background-position: center;
   border-radius: 0 2px 2px 0;
@@ -169,7 +223,7 @@ input[type="submit"]:active {
   display: block;
   margin-bottom: 40px;
   font-size: 28px;
-  color: #FFF;
+  color: #000000;
   text-align: center;
 }
 

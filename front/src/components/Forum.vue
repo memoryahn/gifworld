@@ -17,15 +17,15 @@
             <li class="page-item"><a class="page-link" href="#">10</a></li>
             <li class="page-item"><a class="page-link" href="#">Next</a></li>
           </ul>
-          <h4>게시판</h4>
+          <h4>Forum</h4>
           <div v-bind:id="gif._id" class="list-group-item list-group-item-action" @click="listclick( gif )" v-for="(gif,key) in gifdata" v-bind:key="key">
           <!-- Date/Time -->
-          <span style="font-size:12px">번호</span>
-          <span style="font-size:14px">제목</span>        
-          <span style="float:right;font-size:14px">글쓴이</span> 
-          <span style="float:right;font-size:14px">날짜</span>
+          <span style="font-size:12px">Num</span>
+          <span style="font-size:14px">Title</span>        
+          <span style="float:right;font-size:14px">Author</span> 
+          <span style="float:right;font-size:14px">Date</span>
           <!-- <span style="float:right;font-size:10px">{{ gif.last_update}}</span> -->
-          <span style="float:right;font-size:14px">조회수</span> 
+          <span style="float:right;font-size:14px">Views</span> 
           <!-- Comments Form -->          
           <!-- <div class="card my-4">
             <h6 class="card-header">코멘트 남기기:</h6>

@@ -9,13 +9,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="/#/forum">게시판</a>
+              <a class="nav-link" href="/#/forum">Forum</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/#/Signin">로그인</a>
+              <a class="nav-link" href="/#/Signin">Signin</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/#/Signup">가입</a>
+              <a class="nav-link" href="/#/Signup">Signup</a>
             </li>
           </ul>
         </div>

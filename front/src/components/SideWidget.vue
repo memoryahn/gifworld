@@ -1,7 +1,7 @@
 <template>
 <div>
 <div class="card my-4">
-<h5 class="card-header">검색</h5>
+<h5 class="card-header">Search</h5>
 <div class="card-body">
   <div class="input-group">
     <input type="text" class="form-control" placeholder="Search for...">
@@ -14,7 +14,7 @@
 
 <!-- Categories Widget -->
 <div class="card my-4">
-<h5 class="card-header">최고 조회수</h5>
+<h5 class="card-header">Most views</h5>
 <div class="card-body">
       <ul class="list-unstyled mb-0">
         <li>
@@ -30,7 +30,7 @@
 </div>
 </div>
 <div class="card my-4">
-<h5 class="card-header">최고 추천수</h5>
+<h5 class="card-header">Most like</h5>
 <div class="card-body">
       <ul class="list-unstyled mb-0">
         <li>
@@ -47,9 +47,9 @@
 </div>
 <!-- Side Widget -->
 <div class="card my-4">
-<h5 class="card-header">옵션</h5>
+<h5 class="card-header">Something</h5>
 <div class="card-body">
-  호이호이
+  hello
 </div>
 </div>
 </div>

@@ -22,10 +22,10 @@
           <!-- Date/Time -->
           <span style="font-size:12px">{{ gif.count }}</span>
           <span style="font-size:14px">{{ gif.title }}</span>        
-          <span style="float:right;font-size:14px">글쓴이</span> 
-          <span style="float:right;font-size:14px">날짜</span>
+          <span style="float:right;font-size:14px">Auther</span> 
+          <span style="float:right;font-size:14px">Date</span>
           <!-- <span style="float:right;font-size:10px">{{ gif.last_update}}</span> -->
-          <span style="float:right;font-size:14px">조회수</span> 
+          <span style="float:right;font-size:14px">Views</span> 
           <!-- Comments Form -->          
           <!-- <div class="card my-4">
             <h6 class="card-header">코멘트 남기기:</h6>

@@ -133,7 +133,7 @@ input[type="submit"]:active {
   padding: 40px;
   width: 300px;
   height: 400px;
-  background: url('https://goo.gl/YbktSj');
+  /* background: url('https://goo.gl/YbktSj'); */
   background-size: cover;
   background-position: center;
   border-radius: 0 2px 2px 0;
@@ -143,7 +143,7 @@ input[type="submit"]:active {
   display: block;
   margin-bottom: 40px;
   font-size: 28px;
-  color: #FFF;
+  color: #000000;
   text-align: center;
 }
 

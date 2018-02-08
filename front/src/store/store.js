@@ -11,12 +11,16 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         loading: false,
-        user: null,      
+        user: null,   
+        error: null,   
     },
   
     getters : {
         loading (state) {
             return state.loading
+        },
+        error (state) {
+            return state.error
         },
         user(state){
             return state.user
@@ -24,17 +28,23 @@ export const store = new Vuex.Store({
     },
 
     mutations : {
-        setLoading(state, payload) {
+        setLoadingM(state, payload) {
             state.loading = payload
         },
-        setUser(state, payload){
+        setErrorM(state,payload){
+            stete.error = payload
+        },
+        clearErrorM(state){
+            state.error=null
+        },
+        setUserM(state, payload){
             state.user = payload
         }                  
     },
   
     actions : {
-        setLoadings({commit},payload){
-            commit('setLoading',payload)
+        setLoading({commit},payload){
+            commit('setLoadingM',payload)
         },
         signUp({commit},payload){
             let newUser={
@@ -49,7 +59,7 @@ export const store = new Vuex.Store({
                     newUser.userId=userId
                     firebase.database().ref(/users/+userId+'/').set(newUser)
                     .then(()=>{
-                        commit('setUser',newUser)
+                        commit('setUserM',newUser)
                         console.log('signup user')
                     })
                     .catch((error)=>{
@@ -61,7 +71,6 @@ export const store = new Vuex.Store({
                 console.log(error)
             })
         }
-
     },
     modules: {
 
