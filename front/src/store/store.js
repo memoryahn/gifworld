@@ -11,7 +11,8 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         loading: false,
-        user: null,   
+        user: null, 
+        loginError:null,  
         error: null,   
     },
   
@@ -24,6 +25,9 @@ export const store = new Vuex.Store({
         },
         user(state){
             return state.user
+        },
+        loginError(state){
+            return state.loginError
         }
     },
 
@@ -39,6 +43,9 @@ export const store = new Vuex.Store({
         },
         setUserM(state, payload){
             state.user = payload
+        },
+        setLoginErrorM(state,payload){
+            state.loginError = payload
         }                  
     },
   
@@ -68,7 +75,7 @@ export const store = new Vuex.Store({
                 }
             )
             .catch((error)=>{
-                console.log(error)
+                commit('setLoginErrorM',error.message)
             })
         },
         signIn({commit},payload){
@@ -79,12 +86,11 @@ export const store = new Vuex.Store({
             }
             firebase.auth().signInWithEmailAndPassword(payload.email,payload.password)
             .then(user=>{
-                console.log('login')
                 loginUser.userId=user.uid
                 commit('setUserM',loginUser)
             })
             .catch(error=>{
-                console.log(error)
+                commit('setLoginErrorM',error.message)
             })
 
         },

@@ -1,24 +1,9 @@
 <template>
 <div >
           <!-- Title -->
-          <ul class="pagination">
-            <li class="page-item disabled">
-              <span class="page-link">Previous</span>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active"><span class="page-link">2<span class="sr-only">(current)</span></span></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item"><a class="page-link" href="#">6</a></li>
-            <li class="page-item"><a class="page-link" href="#">7</a></li>
-            <li class="page-item"><a class="page-link" href="#">8</a></li>
-            <li class="page-item"><a class="page-link" href="#">9</a></li>
-            <li class="page-item"><a class="page-link" href="#">10</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>
-          <h4>Forum</h4>
-          <div v-bind:id="gif._id" class="list-group-item list-group-item-action" @click="listclick( gif )" v-for="(gif,key) in gifdata" v-bind:key="key">
+          
+          <div align='center' style="margin-top:10px"><h4>Forum</h4></div>
+          <div v-bind:id="forum._id" class="list-group-item list-group-item-action" @click="listclick( forum )" v-for="(forum,key) in forumData" v-bind:key="key">
           <!-- Date/Time -->
           <span style="font-size:12px">Num</span>
           <span style="font-size:14px">Title</span>        
@@ -38,8 +23,33 @@
               </form>
             </div>
           </div> -->
-          </div> 
+          </div>
+          <ul class="pagination" style="margin-top:10px">
+            <li class="page-item disabled">
+              <span class="page-link">Previous</span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active"><span class="page-link">2<span class="sr-only">(current)</span></span></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#">6</a></li>
+            <li class="page-item"><a class="page-link" href="#">7</a></li>
+            <li class="page-item"><a class="page-link" href="#">8</a></li>
+            <li class="page-item"><a class="page-link" href="#">9</a></li>
+            <li class="page-item"><a class="page-link" href="#">10</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul> 
           <!-- 댓글용으로 남겨둠 -->
           <!-- <span class="badge badge-secondary" v-if="gif.count" > -->
         </div>
 </template>
+<script>
+export default{
+  data(){
+    return{
+      forumData:null
+    }
+  }
+}
+</script>

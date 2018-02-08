@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style="margin-top:45px">
 <div class="card my-4">
 <h5 class="card-header">Search</h5>
 <div class="card-body">

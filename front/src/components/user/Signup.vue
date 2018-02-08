@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style="margin-top:45px">
 <div id="login-box">
 <div class="left">
     <h1>Sign up</h1>
@@ -27,10 +27,13 @@
 </div>
 <div class="or">OR</div>
 </div>
+<div align="center">
 <div class="message valid">{{ validation.firstError('name') }}</div>
 <div class="message valid">{{ validation.firstError('email') }}</div>
 <div class="message valid">{{ validation.firstError('password') }}</div>
 <div class="message valid">{{ validation.firstError('password2') }}</div>
+<div class="valid">{{ loginError }}</div>
+</div>
 </div>
 </template>
 
@@ -71,9 +74,12 @@ export default {
         }
       }
   },
-  compurted: {
+  computed: {
       user(){
           return this.$store.getters.user
+      },
+      loginError(){
+        return this.$store.getters.loginError
       }
   },
   methods: {

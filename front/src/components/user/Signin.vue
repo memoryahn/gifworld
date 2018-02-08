@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style="margin-top:45px">
 <div id="login-box">
 <div class="left">
     <h1>Sign in</h1>
@@ -15,15 +15,18 @@
 </div>
 <div class="right">
     <span class="loginwith">Sign in with<br />social network</span>
-    
+
     <button class="social-signin facebook">Log in with facebook</button>
     <button class="social-signin twitter">Log in with Twitter</button>
     <button class="social-signin google">Log in with Google+</button>
 </div>
 <div class="or">OR</div>
 </div>
+<div align="center">
 <div class="message valid">{{ validation.firstError('email') }}</div>
 <div class="message valid">{{ validation.firstError('password') }}</div>
+<div class="valid" >{{ loginError }}</div>
+</div>
 </div>
 </template>
 <script>
@@ -51,11 +54,14 @@ export default {
     },
     password(value){
       return Validator.value(value).required().minLength(6)
-    }
+    },
   },
   computed:{
     user(){
       return this.$store.getters.user
+    },
+    loginError(){
+      return this.$store.getters.loginError
     }
   },
   methods:{
