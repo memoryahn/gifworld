@@ -12,7 +12,10 @@
               <a class="nav-link" href="/#/forum">게시판</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">로그인</a>
+              <a class="nav-link" href="/#/Signin">로그인</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/#/Signup">가입</a>
             </li>
           </ul>
         </div>
