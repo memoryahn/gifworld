@@ -3,11 +3,7 @@
 <div id="login-box">
 <div class="left">
     <h1>Sign up</h1>
-    <form 
-    @submit.prevent="onSignup" 
-    ref="form"
-    class="form-group" 
-    lazy-validation >
+    <form @submit.prevent="onSignup" ref="form" class="form-group" lazy-validation >
         <div class="form-group" :class="{error: validation.hasError('name')}"> 
         <input v-model="name" type="text" name="name" placeholder="Username"/>
         </div>
@@ -23,9 +19,8 @@
         <input type="submit" name="signup_submit" value="Sign me up" />
     </form>
 </div>
-
 <div class="right">
-    <span class="loginwith">Sign in with<br />social network</span>
+    <span class="loginwith">Sign Up with<br />social network</span>
     <button class="social-signin facebook">Log in with facebook</button>
     <button class="social-signin twitter">Log in with Twitter</button>
     <button class="social-signin google">Log in with Google+</button>
@@ -39,12 +34,9 @@
 </div>
 </template>
 
-<script>
- 
+<script> 
 var SimpleVueValidation = require('simple-vue-validator');
 var Validator = SimpleVueValidation.Validator;
-
-  
 export default {
   data () {
     return {

@@ -70,6 +70,27 @@ export const store = new Vuex.Store({
             .catch((error)=>{
                 console.log(error)
             })
+        },
+        signIn({commit},payload){
+            let loginUser={
+                name:payload.name,
+                email:payload.email,
+                userId:null
+            }
+            firebase.auth().signInWithEmailAndPassword(payload.email,payload.password)
+            .then(user=>{
+                console.log('login')
+                loginUser.userId=user.uid
+                commit('setUserM',loginUser)
+            })
+            .catch(error=>{
+                console.log(error)
+            })
+
+        },
+        logout({commit}){
+            firebase.auth().signOut()
+            commit('setUserM',null)
         }
     },
     modules: {

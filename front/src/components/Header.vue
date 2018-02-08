@@ -12,10 +12,13 @@
               <a class="nav-link" href="/#/forum">Forum</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/#/Signin">Signin</a>
+              <a class="nav-link" href="/#/Signin" v-if="!userIsAuthenticated">Signin</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/#/Signup">Signup</a>
+              <a class="nav-link" href="/#/Signup" v-if="!userIsAuthenticated">Signup</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="onLogout" v-if="userIsAuthenticated">Logout</a>
             </li>
           </ul>
         </div>
@@ -27,6 +30,20 @@
 export default {
   data () {
     return {
+    }
+  },
+  computed:{
+    user(){
+      return this.$store.getters.user
+    },
+    userIsAuthenticated(){
+      return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+    }
+  },
+  methods:{
+    onLogout(){
+      this.$store.dispatch('logout')
+      this.$router.push('/')
     }
   }
 }

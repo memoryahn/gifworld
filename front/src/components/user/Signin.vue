@@ -1,11 +1,15 @@
 <template>
+<div>
 <div id="login-box">
 <div class="left">
     <h1>Sign in</h1>
-    <form @submit.prevent="onSignin" ref="form" lazy-validation>
-        <input v-model="name" type="text" name="username" placeholder="Username" required/>
-        <input v-model="email" type="text" name="email" placeholder="E-mail" required/>
-        <input v-model="password" type="password" name="password" placeholder="Password" required/>
+    <form @submit.prevent="onSignin" ref="form" class="form-group" lazy-validation>
+      <div class="form-group" :class="{error: validation.hasError('email')}">
+        <input v-model="email" type="text" name="email" placeholder="E-mail" />
+      </div>
+        <div class="form-group" :class="{error: validation.hasError('password')}">
+        <input v-model="password" type="password" name="password" placeholder="Password" />
+        </div>
         <input type="submit" name="signin_submit" value="Sign in" />
     </form>
 </div>
@@ -18,7 +22,56 @@
 </div>
 <div class="or">OR</div>
 </div>
+<div class="message valid">{{ validation.firstError('email') }}</div>
+<div class="message valid">{{ validation.firstError('password') }}</div>
+</div>
 </template>
+<script>
+var SimpleVueValidation = require('simple-vue-validator')
+var Validator = SimpleVueValidation.Validator
+export default {
+  data(){
+    return{
+      email:'',
+      password:'',
+    }
+  },
+  watch:{
+    user(value){
+      console.log('userlogincheck')
+      if(value != null && value !== undefined){
+        console.log('userlogin')
+        this.$router.push('/')
+      }
+    }
+  },
+  validators:{
+    email(value){
+      return Validator.value(value).required().email()
+    },
+    password(value){
+      return Validator.value(value).required().minLength(6)
+    }
+  },
+  computed:{
+    user(){
+      return this.$store.getters.user
+    }
+  },
+  methods:{
+    onSignin(){
+      this.$validate()
+      .then((success=>{
+        console.log('check1')
+        if(success){
+          console.log('check2')
+          this.$store.dispatch('signIn',{name:this.name,email:this.email,password:this.password})
+        }
+      }))
+    }
+  }
+}
+</script>
 <style scoped>
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 *:focus {
@@ -44,7 +97,9 @@ body {
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
-
+.valid{
+  color:red;
+}
 .left {
   position: absolute;
   top: 0;
