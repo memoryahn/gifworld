@@ -105,7 +105,9 @@ export default {
   },
   mounted() {      
             console.log('create')
-            axios.get('http://127.0.0.1:5000/api/getgif/1')
+            // axios.get('http://127.0.0.1:5000/api/getgif/1')
+            // 리눅스 셋팅
+            axios.get('http://220.230.124.148:5000/api/getgif/1')
             .then(response => {        
                 console.log(response)    
                 this.gifdata = response.data
