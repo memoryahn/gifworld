@@ -2,13 +2,13 @@
 <div id="login-box">
 <div class="left">
     <h1>Sign up</h1>
-    
-    <input type="text" name="username" placeholder="Username" />
-    <input type="text" name="email" placeholder="E-mail" />
-    <input type="password" name="password" placeholder="Password" />
-    <input type="password" name="password2" placeholder="Retype password" />
-    
-    <input type="submit" name="signup_submit" value="Sign me up" />
+    <form @submit.prevent="onSignup" ref="form" lazy-validation>
+        <input v-model="name" type="text" name="username" placeholder="Username" required/>
+        <input v-model="email" type="text" name="email" placeholder="E-mail" required/>
+        <input v-model="password" type="password" name="password" placeholder="Password" required/>
+        <input v-model="password2" :rules="[comparePasswords]" type="password" name="password2" placeholder="Retype password" required/>
+        <input type="submit" name="signup_submit" value="Sign me up" />
+    </form>
 </div>
 
 <div class="right">
@@ -26,7 +26,21 @@
 export default {
   data () {
     return {
+        name: '',
+        email: '',
+        password: '',
+        password2: '',
     }
+  },
+  compurted: {
+      comparePasswords () {
+        return this.password !== this.password2 ? 'passwords do not match' : ''
+      },
+  },
+  methods: {
+      onSignup() {
+          this.$store.dispatch('signUp',{name:this.name,email:this.email,password:this.password})
+      }
   }
 }
 </script>

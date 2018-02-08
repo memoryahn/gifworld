@@ -15,15 +15,16 @@ new Vue({
   store,
   components: { App },
   template: '<App/>',
-  create() {
+  created() {
     var config = {
-      apiKey: "AIzaSyBqRqMQFJ7EgRURSLoFernDmrRDZBxasm4",
-      authDomain: "vilios-e3de0.firebaseapp.com",
-      databaseURL: "https://vilios-e3de0.firebaseio.com",
-      projectId: "vilios-e3de0",
-      storageBucket: "vilios-e3de0.appspot.com",
-      messagingSenderId: "540966614655"
+      apiKey: "AIzaSyBTmupRNEQFNazgY0zal6BenOI5fJ1uj0Q",
+      authDomain: "gifworld-1.firebaseapp.com",
+      databaseURL: "https://gifworld-1.firebaseio.com",
+      projectId: "gifworld-1",
+      storageBucket: "gifworld-1.appspot.com",
+      messagingSenderId: "770310291191"
     };
+    console.log('firebase on')
     firebase.initializeApp(config);
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
