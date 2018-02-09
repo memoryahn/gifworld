@@ -21,9 +21,9 @@
 </div>
 <div class="right">
     <span class="loginwith">Sign Up with<br />social network</span>
-    <button class="social-signin facebook">Log in with facebook</button>
-    <button class="social-signin twitter">Log in with Twitter</button>
-    <button class="social-signin google">Log in with Google+</button>
+    <button class="social-signin facebook" @click="appSignup('facebook')">Log in with facebook</button>
+    <button class="social-signin twitter" @click="appSignup('twitter')">Log in with Twitter</button>
+    <button class="social-signin google" @click="appSignup('google')">Log in with Google+</button>
 </div>
 <div class="or">OR</div>
 </div>
@@ -40,6 +40,8 @@
 <script> 
 var SimpleVueValidation = require('simple-vue-validator');
 var Validator = SimpleVueValidation.Validator;
+import * as firebase from 'firebase'
+
 export default {
   data () {
     return {
@@ -51,9 +53,7 @@ export default {
   },
   watch: {
       user(value){
-          console.log('change')
           if(value !== null && value !== undefined){
-              console.log('sgininwatch')
               this.$router.push('/')
           }
       }
@@ -90,6 +90,25 @@ export default {
           this.$store.dispatch('signUp',{name:this.name,email:this.email,password:this.password})
           }
         }))
+      },
+      appSignup(app){
+        var provider=null
+        if(app=='google'){
+          provider = new firebase.auth.GoogleAuthProvider()
+        }else if(app == 'facebook'){
+          provider = new firebase.auth.FacebookAuthProvider()
+        }else if(app == 'twitter'){
+          provider = new firebase.auth.TwitterAuthProvider()
+        }
+        firebase.auth().signInWithRedirect(provider)
+        firebase.auth().getRedirectResult().then(result=>{
+        })
+        .catch(error=>{
+          var errorCode = error.code
+          var errorMessage = error.message
+          var email=error.email
+          var credential=error.credential
+        })
       }
   }
 }

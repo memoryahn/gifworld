@@ -64,7 +64,7 @@ export const store = new Vuex.Store({
                 user=>{
                     let userId=user.uid
                     newUser.userId=userId
-                    firebase.database().ref(/users/+userId+'/').set(newUser)
+                    firebase.database().ref('/users/'+userId+'/').set(newUser)
                     .then(()=>{
                         commit('setUserM',newUser)
                         console.log('signup user')
@@ -93,6 +93,21 @@ export const store = new Vuex.Store({
                 commit('setLoginErrorM',error.message)
             })
 
+        },
+        autoSignIn({commit},payload){
+            var user={
+                userId: payload.uid,
+                email:payload.email,
+                name:payload.displayName,
+            }
+            firebase.database().ref('/users/'+payload.uid+'/').set(user)
+                    .then(()=>{
+                        commit('setUserM',user)
+                    })
+                    .catch((error)=>{
+                        console.log(error)
+                    })
+            console.log('autoSignIn')
         },
         logout({commit}){
             firebase.auth().signOut()

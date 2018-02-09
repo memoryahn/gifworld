@@ -26,11 +26,10 @@ new Vue({
       storageBucket: "gifworld-1.appspot.com",
       messagingSenderId: "770310291191"
     };
-    console.log('firebase on')
     firebase.initializeApp(config);
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // this.$store.dispatch('autoSignIn', user)
+        this.$store.dispatch('autoSignIn', user)
         // this.$store.dispatch('fetchUserData')
       }
     })  
