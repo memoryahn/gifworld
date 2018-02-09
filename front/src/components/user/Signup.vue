@@ -20,18 +20,18 @@
     </form>
 </div>
 <div class="right">
-    <span class="loginwith">Sign Up with<br />social network</span>
-    <button class="social-signin facebook" @click="appSignup('facebook')">Log in with facebook</button>
-    <button class="social-signin twitter" @click="appSignup('twitter')">Log in with Twitter</button>
-    <button class="social-signin google" @click="appSignup('google')">Log in with Google+</button>
+    <span class="loginwith">Social network</span>
+    <button class="social-signin facebook" @click="appSignup('facebook')">facebook</button>
+    <button class="social-signin twitter" @click="appSignup('twitter')">Twitter</button>
+    <button class="social-signin google" @click="appSignup('google')">Google+</button>
 </div>
 <div class="or">OR</div>
 </div>
 <div align="center">
-<div class="message valid">{{ validation.firstError('name') }}</div>
-<div class="message valid">{{ validation.firstError('email') }}</div>
-<div class="message valid">{{ validation.firstError('password') }}</div>
-<div class="message valid">{{ validation.firstError('password2') }}</div>
+<div class="message valid" v-if="validation.firstError('name')">Name : {{ validation.firstError('name') }}</div>
+<div class="message valid" v-if="validation.firstError('email')">Email : {{ validation.firstError('email') }}</div>
+<div class="message valid" v-if="validation.firstError('password')">Password : {{ validation.firstError('password') }}</div>
+<div class="message valid" v-if="validation.firstError('password2')">Retpye password : {{ validation.firstError('password2') }}</div>
 <div class="valid">{{ loginError }}</div>
 </div>
 </div>

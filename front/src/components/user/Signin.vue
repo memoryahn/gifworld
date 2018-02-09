@@ -14,17 +14,17 @@
     </form>
 </div>
 <div class="right">
-    <span class="loginwith">Sign in with<br />social network</span>
+    <span class="loginwith">Social network</span>
 
-    <button class="social-signin facebook" @click="appSignin('facebook')">Log in with facebook</button>
-    <button class="social-signin twitter" @click="appSignin('twitter')">Log in with Twitter</button>
-    <button class="social-signin google" @click="appSignin('google')">Log in with Google+</button>
+    <button class="social-signin facebook" @click="appSignin('facebook')">facebook</button>
+    <button class="social-signin twitter" @click="appSignin('twitter')">Twitter</button>
+    <button class="social-signin google" @click="appSignin('google')">Google+</button>
 </div>
 <div class="or">OR</div>
 </div>
 <div align="center">
-<div class="message valid">{{ validation.firstError('email') }}</div>
-<div class="message valid">{{ validation.firstError('password') }}</div>
+<div class="message valid" v-if="validation.firstError('email')">Email : {{ validation.firstError('email') }}</div>
+<div class="message valid" v-if="validation.firstError('password')">Password : {{ validation.firstError('password') }}</div>
 <div class="valid" >{{ loginError }}</div>
 </div>
 </div>

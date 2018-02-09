@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row" >
       <app-header></app-header>
       <div class="col-lg-8">
     <router-view/>

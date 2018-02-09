@@ -2,14 +2,17 @@
   <div  >
           <!-- Title -->
           <div align='center' style="margin-top:10px"><h4>Gif</h4></div>
+          
           <div v-bind:id="gif._id"  class="list-group-item list-group-item-action" @click="listclick( gif )" v-for="(gif,key) in gifdata" v-bind:key="key">
           <!-- Date/Time -->
-          <span style="font-size:12px">{{ gif.count }}</span>
-          <span style="font-size:14px">{{ gif.title }}</span>        
-          <span style="float:right;font-size:14px">Auther</span> 
-          <span style="float:right;font-size:14px">Date</span>
-          <!-- <span style="float:right;font-size:10px">{{ gif.last_update}}</span> -->
-          <span style="float:right;font-size:14px">Views</span> 
+          <div class="row">
+          <div class="col-1" style="font-size:12px">{{ gif.count }}</div>
+          <div class="col-8" style="font-size:14px">{{ gif.title }}</div>        
+          <div class="col-1" style="font-size:14px">Auther</div> 
+          <div class="col-1" style="font-size:14px">Date</div>
+          <!-- class="col-2" <div style="font-size:10px">{{ gif.last_update}}</div> -->
+          <div class="col-1" style="font-size:14px">Views</div> 
+          </div>
           <!-- Comments Form -->          
           <!-- <div class="card my-4">
             <h6 class="card-header">코멘트 남기기:</h6>
@@ -108,7 +111,6 @@ export default {
             // 리눅스 셋팅
             // axios.get('http://220.230.124.148:5000/api/getgif/1')
             .then(response => {        
-                console.log(response)    
                 this.gifdata = response.data
             })
             .catch(e => {
