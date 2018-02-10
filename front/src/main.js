@@ -5,18 +5,22 @@ import App from './App'
 import router from './router/index'
 import { store } from './store/store'
 import * as firebase from 'firebase'
-var SimpleVueValidation = require('simple-vue-validator')
+import SimpleVueValidation from 'simple-vue-validator'
+import Paginate from 'vuejs-paginate'
 
 Vue.use(SimpleVueValidation);
 Vue.config.productionTip = false
+
+Vue.component('paginate', Paginate)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
-  template: '<App/>',
+  // components: { App },
+  // template: '<App/>',
+  render: h => h(App),
   created() {
     var config = {
       apiKey: "AIzaSyBTmupRNEQFNazgY0zal6BenOI5fJ1uj0Q",

@@ -1,5 +1,5 @@
 <template>
 <div>
-<h1>profile</h1>
+    <div align='center' style="margin-top:10px"><h4>Profile</h4></div>
 </div>
 </template>

@@ -40,6 +40,6 @@ export default new Router({
       path: '/Loading',
       name: 'Loading',
       component: Loading
-    }
+    },
   ],
 })

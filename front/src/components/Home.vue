@@ -28,20 +28,15 @@
           <!-- 댓글용으로 남겨둠 -->
           <!-- <span class="badge badge-secondary" v-if="gif.count" > -->
             <ul class="pagination" style="margin-top:10px">
-            <li class="page-item disabled">
-              <span class="page-link">Previous</span>
+            <!-- <li class="page-item disabled"> -->
+            <li class="page-item" @click="previous">
+              <a class="page-link">Previous</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active"><span class="page-link">2<span class="sr-only">(current)</span></span></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item"><a class="page-link" href="#">6</a></li>
-            <li class="page-item"><a class="page-link" href="#">7</a></li>
-            <li class="page-item"><a class="page-link" href="#">8</a></li>
-            <li class="page-item"><a class="page-link" href="#">9</a></li>
-            <li class="page-item"><a class="page-link" href="#">10</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <!-- <li class="page-item active"><span class="page-link">2<span class="sr-only">(current)</span></span></li> -->
+            <li class="page-item" :id="i" 
+            v-for="(i,index) in page" :key="index" @click="pagination(i)">
+            <a class="page-link">{{ i }}</a></li>
+            <li class="page-item" @click="next"><a class="page-link">Next</a></li>
           </ul>              
         </div>
         <!-- Sidebar Widgets Column -->
@@ -50,10 +45,11 @@
 </template>
 <script>
 import axios from 'axios'
-export default {
-    
+import Vue from 'vue'
+export default {  
   data () {
     return {
+      page:[],
         gifdata:{
         },
         openid:'',
@@ -67,6 +63,39 @@ export default {
       }
   },
   methods : {
+    next(){
+      for(var i in this.page){
+        // this.page[i]=this.page[i]+10
+        Vue.set(this.page,i,this.page[i]+10)
+        }
+        console.log(this.page[0])
+    },
+    previous(){
+      if(this.page[0]>10){
+        for(var i in this.page){
+          Vue.set(this.page,i,this.page[i]-10)
+        }
+      }
+      console.log(this.page[0])
+    },
+    pagination(p){
+      this.$store.dispatch('setLoading',true)
+      
+            // 리눅스 셋팅
+            // axios.get('http://220.230.124.148:5000/api/getgif/1')
+            axios.get('http://127.0.0.1:5000/api/getgif/'+p)
+            .then(response => {        
+                // this.gifdata = response.data
+                for(var i in response.data){
+                  Vue.set(this.gifdata,i,response.data[i])
+                }
+                this.$store.dispatch('setLoading',false)
+            })
+            .catch(e => {
+            console.log(e)
+            this.$store.dispatch('setLoading',false)
+            })
+    },
     listclick(gif) {
       if(this.open && this.openid == gif._id){
         document.getElementById(gif.number).remove()
@@ -107,7 +136,11 @@ export default {
       }
     }
   },
-  mounted() {      
+  mounted() {
+            for(var i=0;i<10;i++){
+              this.page[i]=i+1      
+            }
+            
             this.$store.dispatch('setLoading',true)
             axios.get('http://127.0.0.1:5000/api/getgif/1')
             // 리눅스 셋팅
