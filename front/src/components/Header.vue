@@ -21,7 +21,7 @@
               <a class="nav-link" href="/#/Signup" v-if="!userIsAuthenticated">Signup</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/" @click="onLogout" v-if="userIsAuthenticated">Logout</a>
+              <a class="nav-link" href="/#/" @click="onLogout" v-if="userIsAuthenticated">Logout</a>
             </li>
           </ul>
         </div>

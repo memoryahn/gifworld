@@ -2,7 +2,6 @@
   <div  >
           <!-- Title -->
           <div align='center' style="margin-top:10px"><h4>Gif</h4></div>
-          
           <div v-bind:id="gif._id"  class="list-group-item list-group-item-action" @click="listclick( gif )" v-for="(gif,key) in gifdata" v-bind:key="key">
           <!-- Date/Time -->
           <div class="row">
@@ -63,7 +62,9 @@ export default {
     }
   },
   compute: {
-
+      loading(){
+        return this.$store.getters.loading
+      }
   },
   methods : {
     listclick(gif) {
@@ -107,14 +108,17 @@ export default {
     }
   },
   mounted() {      
+            this.$store.dispatch('setLoading',true)
             axios.get('http://127.0.0.1:5000/api/getgif/1')
             // 리눅스 셋팅
             // axios.get('http://220.230.124.148:5000/api/getgif/1')
             .then(response => {        
                 this.gifdata = response.data
+                this.$store.dispatch('setLoading',false)
             })
             .catch(e => {
             console.log(e)
+            this.$store.dispatch('setLoading',false)
             })
   }
 }

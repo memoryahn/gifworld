@@ -5,6 +5,7 @@ import Signin from '@/components/user/Signin'
 import Signup from '@/components/user/Signup'
 import Profile from '@/components/user/Profile'
 import Home from '@/components/Home'
+import Loading from '@/components/Loading'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/Profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/Loading',
+      name: 'Loading',
+      component: Loading
     }
-  ]
+  ],
 })

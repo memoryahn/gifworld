@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import * as firebase from 'firebase'
+import router from '../router/index'
 // import request from 'request'
 
 Vue.use(Vuex)
@@ -79,6 +80,7 @@ export const store = new Vuex.Store({
             })
         },
         signIn({commit},payload){
+            commit('setLoadingM',true)
             let loginUser={
                 name:payload.name,
                 email:payload.email,
@@ -88,11 +90,12 @@ export const store = new Vuex.Store({
             .then(user=>{
                 loginUser.userId=user.uid
                 commit('setUserM',loginUser)
+                commit('setLoadingM',false)
             })
             .catch(error=>{
                 commit('setLoginErrorM',error.message)
+                commit('setLoadingM',false)
             })
-
         },
         autoSignIn({commit},payload){
             var user={
@@ -103,9 +106,13 @@ export const store = new Vuex.Store({
             firebase.database().ref('/users/'+payload.uid+'/').set(user)
                     .then(()=>{
                         commit('setUserM',user)
+                        commit('setLoadingM',false)
+                        router.push('/')
                     })
                     .catch((error)=>{
                         console.log(error)
+                        commit('setLoadingM',false)
+                        router.push('/')
                     })
             console.log('autoSignIn')
         },

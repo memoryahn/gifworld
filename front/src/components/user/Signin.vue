@@ -43,7 +43,7 @@ export default {
   watch:{
     user(value){
       if(value != null && value !== undefined){
-        this.$router.push('/')
+        this.$router.push('/#/')
       }
     }
   },
@@ -56,6 +56,9 @@ export default {
     },
   },
   computed:{
+    loading(){
+      return this.$store.getters.loading
+    },
     user(){
       return this.$store.getters.user
     },
@@ -74,6 +77,7 @@ export default {
     },
     appSignin(app){
         var provider=null
+        this.$store.dispatch('setLoading',true)
         if(app=='google'){
           provider = new firebase.auth.GoogleAuthProvider()
         }else if(app == 'facebook'){
@@ -83,6 +87,7 @@ export default {
         }
         firebase.auth().signInWithRedirect(provider)
         firebase.auth().getRedirectResult().then(result=>{
+          this.$router.push('/Loading')
         })
         .catch(error=>{
           var errorCode = error.code
