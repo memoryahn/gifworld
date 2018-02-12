@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -33,6 +34,21 @@ def get_gif_count(page):
     for entry in output:
         entry['_id'] = str(entry['_id'])
     return jsonify(output)
+@app.route('/api/getgif/views/<id>',methods=['PUT'])
+def add_view_count(id):
+    coll = mongo.db.gifcoll
+    # print('request:'+request.views)
+    checkCount = coll.find_one({'_id':ObjectId(id)})
+    addCount = int(checkCount['views']) + 1
+    coll.update_one(
+        {"_id": ObjectId(id)},
+        {
+            "$set":{
+            "views":addCount
+        }
+        }
+    )
+    return 'ok'
 
 if __name__ == '__main__':
     app.run(debug=True)

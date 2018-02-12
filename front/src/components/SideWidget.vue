@@ -1,7 +1,7 @@
 <template>
 <div style="margin-top:45px">
-<div class="card my-4">
-<h5 class="card-header">Search</h5>
+<div class="card my-3">
+<h6 class="card-header">Search</h6>
 <div class="card-body">
   <div class="input-group">
     <input type="text" class="form-control" placeholder="Search for...">
@@ -13,8 +13,8 @@
 </div>
 
 <!-- Categories Widget -->
-<div class="card my-4">
-<h5 class="card-header">Most views</h5>
+<div class="card my-3">
+<h6 class="card-header">Most views</h6>
 <div class="card-body">
       <ul class="list-unstyled mb-0">
         <li>
@@ -29,8 +29,8 @@
       </ul>
 </div>
 </div>
-<div class="card my-4">
-<h5 class="card-header">Most like</h5>
+<div class="card my-3">
+<h6 class="card-header">Most like</h6>
 <div class="card-body">
       <ul class="list-unstyled mb-0">
         <li>
@@ -46,10 +46,10 @@
 </div>
 </div>
 <!-- Side Widget -->
-<div class="card my-4">
-<h5 class="card-header">Something</h5>
+<div class="card my-">
+<h6 class="card-header">Site</h6>
 <div class="card-body">
-  hello
+  MLBPARK
 </div>
 </div>
 </div>

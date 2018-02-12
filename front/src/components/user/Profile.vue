@@ -24,7 +24,6 @@ export default {
         if (user) {
             this.user=user
         // User is signed in.
-         console.log(user)
         //     for(var i in user){
         //         Vue.set(this.user[i],i,user[i])
         //     }
