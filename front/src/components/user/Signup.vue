@@ -93,23 +93,24 @@ export default {
       },
       appSignup(app){
         var provider=null
-        if(app=='google'){
-          provider = new firebase.auth.GoogleAuthProvider()
-        }else if(app == 'facebook'){
-          provider = new firebase.auth.FacebookAuthProvider()
-        }else if(app == 'twitter'){
-          provider = new firebase.auth.TwitterAuthProvider()
-        }
-        firebase.auth().signInWithRedirect(provider)
-        firebase.auth().getRedirectResult().then(result=>{
-          this.$router.push('/Loading')
-        })
-        .catch(error=>{
-          var errorCode = error.code
-          var errorMessage = error.message
-          var email=error.email
-          var credential=error.credential
-        })
+        this.$store.dispatch('setLoading',true)
+          if(app=='google'){
+            provider = new firebase.auth.GoogleAuthProvider()
+          }else if(app == 'facebook'){
+            provider = new firebase.auth.FacebookAuthProvider()
+          }else if(app == 'twitter'){
+            provider = new firebase.auth.TwitterAuthProvider()
+          }
+          firebase.auth().signInWithRedirect(provider)
+          firebase.auth().getRedirectResult().then(result=>{
+            this.$router.push('/Loading')
+          })
+          .catch(error=>{
+            var errorCode = error.code
+            var errorMessage = error.message
+            var email=error.email
+            var credential=error.credential
+          })
       }
   }
 }

@@ -5,12 +5,12 @@
           <div v-bind:id="gif._id"  class="list-group-item list-group-item-action" @click="listclick( gif )" v-for="(gif,key) in gifdata" v-bind:key="key">
           <!-- Date/Time -->
           <div class="row">
-          <div class="col-1" style="font-size:12px">{{ gif.count }}</div>
-          <div class="col-8" style="font-size:14px">{{ gif.title }}</div>        
-          <div class="col-1" style="font-size:14px">Auther</div> 
-          <div class="col-1" style="font-size:14px">Date</div>
+          <div class="col-1" style="font-size:10px">{{ gif.count }}</div>
+          <div class="col-8" style="font-size:12px">{{ gif.title }}</div>        
+          <div class="col-1" style="font-size:12px">Auther</div> 
+          <div class="col-1" style="font-size:12px">Date</div>
           <!-- class="col-2" <div style="font-size:10px">{{ gif.last_update}}</div> -->
-          <div class="col-1" style="font-size:14px">Views</div> 
+          <div class="col-1" style="font-size:12px">Views</div> 
           </div>
           <!-- Comments Form -->          
           <!-- <div class="card my-4">
@@ -68,7 +68,6 @@ export default {
         // this.page[i]=this.page[i]+10
         Vue.set(this.page,i,this.page[i]+10)
         }
-        console.log(this.page[0])
     },
     previous(){
       if(this.page[0]>10){
@@ -76,7 +75,6 @@ export default {
           Vue.set(this.page,i,this.page[i]-10)
         }
       }
-      console.log(this.page[0])
     },
     pagination(p){
       this.$store.dispatch('setLoading',true)
@@ -136,7 +134,7 @@ export default {
       }
     }
   },
-  mounted() {
+  created() {
             for(var i=0;i<10;i++){
               this.page[i]=i+1      
             }

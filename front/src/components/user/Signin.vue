@@ -71,7 +71,7 @@ export default {
       this.$validate()
       .then((success=>{
         if(success){
-          this.$store.dispatch('signIn',{name:this.name,email:this.email,password:this.password})
+          this.$store.dispatch('signIn',{email:this.email,password:this.password})
         }
       }))
     },
@@ -94,6 +94,7 @@ export default {
           var errorMessage = error.message
           var email=error.email
           var credential=error.credential
+          console.log(error.errorMessage=' : redirect') 
         })
       }
   }

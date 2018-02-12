@@ -68,7 +68,6 @@ export const store = new Vuex.Store({
                     firebase.database().ref('/users/'+userId+'/').set(newUser)
                     .then(()=>{
                         commit('setUserM',newUser)
-                        console.log('signup user')
                     })
                     .catch((error)=>{
                         console.log(error)
@@ -78,11 +77,20 @@ export const store = new Vuex.Store({
             .catch((error)=>{
                 commit('setLoginErrorM',error.message)
             })
+            var user = firebase.auth().currentUser;
+                    user.updateProfile({
+                    displayName: payload.name
+                    }).then(function() {
+                    console.log('signup user')
+                    // Update successful.
+                    }).catch(function(error) {
+                    // An error happened.
+                    console.log(error)
+                    })
         },
         signIn({commit},payload){
             commit('setLoadingM',true)
             let loginUser={
-                name:payload.name,
                 email:payload.email,
                 userId:null
             }
