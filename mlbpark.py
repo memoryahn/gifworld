@@ -53,7 +53,14 @@ for link in resp:
         print(str(idx))
         num = gifcoll.find({"number":number}).count()
         if num==0:
-            data.append({'count':count,'title':titles,'srcs':srcs,'number':number,'last_update':datetime.datetime.now()})             
+            data.append({'count':count,
+            'title':titles,
+            'srcs':srcs,
+            'number':number,
+            'last_update':datetime.datetime.now(),
+            'author':'mlbpark',
+            'views':0
+            })             
             count=count+1
             print(count)
     # except:

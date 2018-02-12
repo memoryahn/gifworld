@@ -7,10 +7,10 @@
           <div class="row">
           <div class="col-1" style="font-size:10px">{{ gif.count }}</div>
           <div class="col-8" style="font-size:12px">{{ gif.title }}</div>        
-          <div class="col-1" style="font-size:12px">Auther</div> 
-          <div class="col-1" style="font-size:12px">Date</div>
+          <div class="col-1" style="font-size:12px">{{ gif.author }}</div> 
+          <div class="col-1" style="font-size:12px">{{ gif.last_update}}</div>
           <!-- class="col-2" <div style="font-size:10px">{{ gif.last_update}}</div> -->
-          <div class="col-1" style="font-size:12px">Views</div> 
+          <div class="col-1" style="font-size:12px">{{ gif.views }}</div> 
           </div>
           <!-- Comments Form -->          
           <!-- <div class="card my-4">
@@ -143,8 +143,19 @@ export default {
             axios.get('http://127.0.0.1:5000/api/getgif/1')
             // 리눅스 셋팅
             // axios.get('http://220.230.124.148:5000/api/getgif/1')
-            .then(response => {        
-                this.gifdata = response.data
+            .then(response => {
+                for(var r in response.data){
+                  var temptime = new Date(response.data[r].last_update)
+                  var temptime_hour = temptime.getUTCHours()
+                  var temptime_min = temptime.getUTCMinutes()
+                  var tt = temptime_hour+":"+temptime_min
+                  console.log(tt)
+                  response.data[r].last_update = tt
+                }        
+                for(var i in response.data){
+                  Vue.set(this.gifdata,i,response.data[i])
+                }
+
                 this.$store.dispatch('setLoading',false)
             })
             .catch(e => {
