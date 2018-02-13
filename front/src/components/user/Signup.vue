@@ -101,7 +101,7 @@ export default {
           }else if(app == 'twitter'){
             provider = new firebase.auth.TwitterAuthProvider()
           }
-          firebase.auth().signInWithRedirect(provider)
+          firebase.auth().signInWithPopup(provider)
           firebase.auth().getRedirectResult().then(result=>{
             this.$router.push('/Loading')
           })

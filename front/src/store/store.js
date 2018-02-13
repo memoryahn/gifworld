@@ -125,8 +125,11 @@ export const store = new Vuex.Store({
             console.log('autoSignIn')
         },
         logout({commit}){
+            
             firebase.auth().signOut()
+            router.push('/Signin')
             commit('setUserM',null)
+            
         },
     },
     modules: {

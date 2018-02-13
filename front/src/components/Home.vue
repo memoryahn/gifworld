@@ -8,22 +8,12 @@
           <div class="col-1" style="font-size:10px">{{ gif.count }}</div>
           <div class="col-8" style="font-size:12px">{{ gif.title }}</div>        
           <div class="col-1" style="font-size:12px">{{ gif.author }}</div> 
-          <div class="col-1" style="font-size:12px;text-align:center">{{ gif.last_update}}</div>
+          <div class="col-1" style="font-size:12px;text-align:center;padding-right:0px">{{ gif.last_update}}</div>
           <!-- class="col-2" <div style="font-size:10px">{{ gif.last_update}}</div> -->
-          <div class="col-1" style="font-size:12px;text-align:right">{{ gif.views }}</div> 
+          <div class="col-1" style="font-size:12px;text-align:center;padding-right:1px">{{ gif.views }}</div> 
           </div>
           <!-- Comments Form -->          
-          <!-- <div class="card my-4">
-            <h6 class="card-header">코멘트 남기기:</h6>
-            <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <textarea class="form-control" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">확인</button>
-              </form>
-            </div>
-          </div> -->
+
           </div> 
           <!-- 댓글용으로 남겨둠 -->
           <!-- <span class="badge badge-secondary" v-if="gif.count" > -->
@@ -38,6 +28,32 @@
             <a class="page-link">{{ i }}</a></li>
             <li class="page-item" @click="next"><a class="page-link">Next</a></li>
           </ul>              
+            <div id="comment"  style="display:none;margin-top:10px;border:1px solid lightgray">
+            <div style="margin:10px">
+              <form>
+                <div class="row">
+                  <div class="col-3" v-if="user">
+                    <img  :src="user.photoURL">
+                    <p>{{ user.displayName }}</p>
+                  </div>
+                  <div class="col-3" v-if="user == null">
+              <input v-model="name" type="text" name="name" placeholder="Name" style="width:130px;margin:6px"/>
+              <input v-model="password" type="password" name="password" placeholder="Password" style="width:130px;margin:6px"/>
+                  </div>
+                <div class="col-9">
+                  <textarea class="form-control" rows="3"></textarea>
+                <button type="submit" class="btn btn-primary btn-sm" 
+                style="float:right;margin-top:10px">submit</button>
+                </div>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+
+
+
+
         </div>
         <!-- Sidebar Widgets Column -->
           <!-- Search Widget -->
@@ -46,6 +62,7 @@
 <script>
 import axios from 'axios'
 import Vue from 'vue'
+import * as firebase from 'firebase'
 export default {  
   data () {
     return {
@@ -55,12 +72,15 @@ export default {
         openid:'',
         openNumber:'',
         open:false,
+        user:{},
+        password:null,
+        name:null
     }
   },
   compute: {
       loading(){
         return this.$store.getters.loading
-      }
+      },
   },
   methods : {
     next(){
@@ -100,14 +120,21 @@ export default {
             })
     },
     listclick(gif) {
+      var user = firebase.auth().currentUser
+      if(user){
+        this.user = user
+      }else{
+        this.user=null
+      }
+      var com = document.getElementById('comment')
       if(this.open && this.openid == gif._id){
         document.getElementById(gif.number).remove()
+        com.style.display="none"
         this.open=false
       }
       else if(this.open && this.openid != gif._id){
         document.getElementById(this.openNumber).remove()
         var div = document.createElement("div")
-      
         for(var i in gif.srcs){        
           var br = document.createElement('br')            
           div.appendChild(br)
@@ -116,8 +143,10 @@ export default {
           img.style.maxWidth="100%"        
           div.appendChild(img)
         }        
-        div.id=gif.number        
+        div.id=gif.number
+        com.style.display="block"
         // document.getElementById(gif._id).appendChild(div)
+        document.getElementById(gif._id).after(com)
         document.getElementById(gif._id).after(div)
         this.openid=gif._id
         this.openNumber=gif.number
@@ -138,9 +167,12 @@ export default {
           img.style.maxWidth="100%"               
           div.appendChild(img)
         }        
-        div.id=gif.number        
+        div.id=gif.number
+        com.style.display="block"
+        document.getElementById(gif._id).after(com)
         // document.getElementById(gif._id).appendChild(div)
-        document.getElementById(gif._id).after(div)
+      document.getElementById(gif._id).after(div)
+    
         this.openid=gif._id
         this.openNumber=gif.number
         this.open=true

@@ -1,11 +1,11 @@
 <template>
 <div>
     <div align='center' style="margin-top:10px"><h4>Profile</h4></div>
+    <p><img :src="user.photoURL"></p>
     <p>Name : {{ user.displayName }}</p>
     <p>Email : {{ user.email }}</p>
-    <p>Photo : <img :src="user.photoURL"></p>
-    <p>CreationTime : {{ user.metadata.creationTime }}</p>
-    <p>LastSignIn : {{ user.metadata.lastSignInTime }}</p>
+    <p>Creation Time : {{ user.metadata.creationTime }}</p>
+    <p>Last SignIn : {{ user.metadata.lastSignInTime }}</p>
 </div>
 </template>
 

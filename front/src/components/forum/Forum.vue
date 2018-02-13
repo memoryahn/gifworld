@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div>
           <!-- Title -->
           
           <div style="margin-top:10px" class="row"><div class="col-5"></div>
