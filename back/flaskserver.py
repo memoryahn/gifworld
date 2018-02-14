@@ -49,7 +49,39 @@ def add_view_count(id):
         }
     )
     return 'ok'
-
+@app.route('/api/getgif/addcom/<id>',methods=['PUT'])
+def add_com(id):
+    coll = mongo.db.gifcoll
+    com = coll.find_one({'_id':ObjectId(id)})
+    comlist = []
+    if 'comlist' in com :
+        comlist=com['comlist']
+        comlist.append(request.json['comId'])
+    else:
+        comlist.append(request.json['comId'])
+    coll.update_one(
+        {"_id": ObjectId(id)},
+        {
+            "$set":{
+            "comlist":comlist
+            }
+        }
+    )
+    return 'ok'
+@app.route('/api/getgif/comment/<id>',methods=['POST'])
+def comment(id):
+    comcoll = mongo.db.comcoll
+    articleId = id
+    checkUser = request.json['checkUser']
+    name = request.json['name']
+    userId = request.json['userId']
+    password = request.json['password']
+    body = request.json['body']
+    comId = comcoll.insert({'name':name,'articleId':id,'userId':userId,'body':body,
+    'password':password})
+    print(comId)
+    return str(comId)
+    
 if __name__ == '__main__':
     app.run(debug=True)
     # 리눅스 셋팅

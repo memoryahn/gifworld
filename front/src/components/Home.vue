@@ -2,7 +2,9 @@
   <div  >
           <!-- Title -->
           <div align='center' style="margin-top:10px"><h4>Gif</h4></div>
-          <div v-bind:id="gif._id"  class="list-group-item list-group-item-action" @click="listclick( gif )" v-for="(gif,key) in gifdata" v-bind:key="key">
+          <div v-bind:id="gif._id"  class="list-group-item list-group-item-action" 
+          @click="listclick( gif )" v-for="(gif,key) in gifdata" v-bind:key="key"
+          style="background:#fffdff">
           <!-- Date/Time -->
           <div class="row">
           <div class="col-1" style="font-size:10px">{{ gif.count }}</div>
@@ -27,13 +29,16 @@
             v-for="(i,index) in page" :key="index" @click="pagination(i)">
             <a class="page-link">{{ i }}</a></li>
             <li class="page-item" @click="next"><a class="page-link">Next</a></li>
-          </ul>              
-            <div id="comment"  style="display:none;margin-top:10px;border:1px solid lightgray">
+          </ul>
+          <div id="comlist">
+            </div>              
+            <div id="comment"  
+            style="display:none;margin-top:10px;border:1px solid lightgray;background:#fffffd">
+              
             <div style="margin:10px">
-              <form>
                 <div class="row">
                   <div class="col-3" v-if="user">
-                    <img  :src="user.photoURL">
+                    <img  :src="user.photoURL" style="width:60px">
                     <p>{{ user.displayName }}</p>
                   </div>
                   <div class="col-3" v-if="user == null">
@@ -41,13 +46,11 @@
               <input v-model="password" type="password" name="password" placeholder="Password" style="width:130px;margin:6px"/>
                   </div>
                 <div class="col-9">
-                  <textarea class="form-control" rows="3"></textarea>
-                <button type="submit" class="btn btn-primary btn-sm" 
+                  <textarea v-model="combody"  rows="3" name="combody"></textarea>
+                <button @click="comClick()"  class="btn btn-primary btn-sm" 
                 style="float:right;margin-top:10px">submit</button>
                 </div>
                 </div>
-                
-              </form>
             </div>
           </div>
 
@@ -74,7 +77,8 @@ export default {
         open:false,
         user:{},
         password:null,
-        name:null
+        name:null,
+        combody:null
     }
   },
   compute: {
@@ -83,6 +87,47 @@ export default {
       },
   },
   methods : {
+    comClick(){
+      if(this.user){
+        console.log(this.user.displayName)
+        axios.post('http://127.0.0.1:5000/api/getgif/comment/'+this.openid,
+      {'checkUser':true,'name':this.user.displayName,
+      'userId':this.user.uid,'password':null,'body':this.combody}
+        )
+        .then(response => { 
+          console.log('vue1 comid:'+response.data)
+        axios.put('http://127.0.0.1:5000/api/getgif/addcom/'+this.openid,{'comId':response.data})
+            .then(res => { 
+              console.log("vue comid" + res.data)
+            })
+            .catch(e => {
+            console.log(e)
+            })   
+              })
+        .catch(e => {
+        console.log(e)
+      })
+      }else{
+      console.log(this.name)
+      axios.post('http://127.0.0.1:5000/api/getgif/comment/'+this.openid,
+      {'checkUser':false,'name':this.name,'userId':null,
+      'password':this.password,'body':this.combody})
+      .then(response=>{
+        console.log('vue1 comid'+response.data)
+        axios.put('http://127.0.0.1:5000/api/getgif/addcom/'+this.openid,
+        {'comId':response.data})
+        .then(res=>{
+          console.log("vue comid" + res.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+        .catch(e=>{
+          console.log(e)
+        })
+      })
+      }
+    },
     next(){
       for(var i in this.page){
         // this.page[i]=this.page[i]+10
